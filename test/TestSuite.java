@@ -14,12 +14,4 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({JUnitTest.class})
 public class TestSuite {
-
-    public static void listOfTests() {
-        JUnitTest jUnitTest = new JUnitTest();
-        jUnitTest.sliceStringTest();
-        jUnitTest.caesarCipher();
-        jUnitTest.breakVigenereTest();
-    }   
-    
 }
