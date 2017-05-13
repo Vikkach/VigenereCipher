@@ -5,6 +5,7 @@
  */
 
 import edu.duke.FileResource;
+import java.util.HashSet;
 import org.junit.Assert;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -73,10 +74,26 @@ public class JUnitTest {
     }
     
     @Test
-    public void breakVigenereTest(){
+    public void countWordsTest(){
+        FileResource fr = new FileResource("athens.txt");
+        FileResource frDic = new FileResource("dictionaries/English");
+        String source = fr.asString();
         VigenereBreaker breaker = new VigenereBreaker();
-        breaker.breakVigenere();
-        
+        HashSet<String> dictionary = breaker.readDictionary(frDic);
+        int realWords = breaker.countWords(source, dictionary);
+        assertEquals(376, realWords);        
+    }
+    @Test
+    public void breakForLanguageTest(){
+        FileResource frDecrypted = new FileResource("athens_keyflute.txt");
+        String sourceDec = frDecrypted.asString();
+        FileResource frEncrypted = new FileResource("athens.txt");
+        String sourceEnc = frEncrypted.asString();
+        FileResource frDic = new FileResource("dictionaries/English");
+        VigenereBreaker breaker = new VigenereBreaker();
+        HashSet<String> dictionary = breaker.readDictionary(frDic);
+        String decryptedMessage = breaker.breakForLanguage(sourceDec, dictionary);
+        assertEquals(sourceEnc, decryptedMessage);
     }
 
 }

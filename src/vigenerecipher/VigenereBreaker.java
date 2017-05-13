@@ -57,19 +57,18 @@ public class VigenereBreaker {
                 validWords = validWords + 1;
             }
         }
-        System.out.println(array.length);
-        System.out.println(validWords);
         return validWords;        
     }
     
     public String breakForLanguage(String encrypted, HashSet<String> dictionary){
         String realDecrypted = "";
+        int[] keys;
+        int maxRealWords = 0;
         for (int i = 1; i <= 100; i++){
-            int[] keys = tryKeyLength(encrypted, i, 'e');
+            keys = tryKeyLength(encrypted, i, 'e');
             VigenereCipher cipher = new VigenereCipher(keys);
             String decrypted = cipher.decrypt(encrypted);
             int realWords = countWords(decrypted, dictionary);
-            int maxRealWords = 0;
             if (realWords > maxRealWords){
                 maxRealWords = realWords;
                 realDecrypted = decrypted;
